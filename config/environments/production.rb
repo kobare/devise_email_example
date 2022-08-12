@@ -62,7 +62,7 @@ Rails.application.configure do
   # config.active_job.queue_adapter     = :resque
   # config.active_job.queue_name_prefix = "devise_email_production"
 
-  config.action_mailer.perform_caching = false
+  # config.action_mailer.perform_caching = false
 
   # Ignore bad email addresses and do not raise email delivery errors.
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.
@@ -90,4 +90,22 @@ Rails.application.configure do
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
+
+  config.action_mailer.raise_delivery_errors = true
+
+  config.action_mailer.perform_caching = false
+  
+  config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+    :address => "smtp.zoho.com", 
+    :port => 465,   
+    :domain => "s-entialtechnologies.com",
+    :tls => true,          
+    :enable_starttls_auto => true,
+    :authentication => :login,
+    :user_name => ENV['EMAIL_USER_ID'],
+    :password => ENV['EMAIL_PASSWORD']
+  }  
+  
 end
