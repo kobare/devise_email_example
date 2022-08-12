@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Devise Email</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
+       
+    <link rel="stylesheet" href="https://kobare.github.io/custom_devise_styles/style.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">    
+  </head>
+
+  <body>
+  
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">Devise Email Example</a>
+    <a class="navbar-brand" href="#"><%= %></a>
+    <% if current_user.nil? %>
+     <%= link_to "sign in", new_user_session_path, method: :get, class: "btn btn-primary btn-sm"%>
+    <% else %>
+     <%= link_to "log out", destroy_user_session_path, method: :delete, class: "btn btn-primary btn-sm"%>
+    <% end %>   
+  </div>
+</nav>
+  
+  
+   <% flash.each do |key, value| %>
+    <div class="<%= flash_class(key) %>">
+     <%= value %>
+    </div>
+   <% end %>
+   
+  <div style="margin-left:20px; margin-right: 20px; margin-top:100px;">
+    <%= yield %>
+  </div>
+  </body>
+</html>
+
